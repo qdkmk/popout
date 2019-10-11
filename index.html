@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画面全体に表示されるポップアウト式メニュー</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <section id="home" class="section section-top">
+    <div class="container-center">
+      <h1 class="title-top">PORTFOLIO</h1>
+      <div class="subtitle">DESIGN & CORDING</div>
+    </div>
+    <div class="arrow"></div>
+  </section>
+  <section id="about" class="section">
+    <div class="l-container">
+      <h1 class="title">ABOUT</h1>
+    </div>
+  </section>
+  <div class="menu" id="js-popout"></div>
+
+  <div class="panel" id="js-popout-panel">
+    <div class="panel-inner">
+      <nav class="l-nav">
+        <ul class="nav">
+          <li class="nav-item"><a href="#home">HOME</a></li>
+          <li class="nav-item"><a href="#about">ABOUT</a></li>
+          <li class="nav-item"><a href="#works">WORKS</a></li>
+          <li class="nav-item"><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+      <div class="close" id="js-popout-close"></div>
+    </div>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
