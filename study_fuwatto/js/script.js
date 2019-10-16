@@ -10,12 +10,11 @@ function showElementAnimation() {
   var scrollY = window.pageYOffset;
   var windowH = window.innerHeight;
 
-  for(var i=0;i<element.length;i++) { var elemClientRect = element[i].getBoundingClientRect();
-    var elemY = scrollY + elemClientRect.top; if(scrollY + windowH - showTiming > elemY) {
+  for(var i=0;i<element.length;i++) {
+    var elemClientRect = element[i].getBoundingClientRect();
+    var elemY =elemClientRect.top;
+    if(windowH - showTiming > elemY) {
       element[i].classList.add('is-show');
-    } else if(scrollY + windowH < elemY) {
-      // 上にスクロールして再度非表示にする場合はこちらを記述
-      element[i].classList.remove('is-show');
     }
   }
 }
