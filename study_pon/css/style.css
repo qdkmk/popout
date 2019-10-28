@@ -1,0 +1,14 @@
+.header-image{
+  background-image: url(../images/kv-bg.jpg);
+  height: 100vh;
+}
+.wrapper{
+  text-align: center;
+}
+.section{
+  transform: matrix(0.8,0,0,0.8,0,50);
+  transition: all 0.35s cubic-bezier(1,2.02,.94,.69);
+}
+.is-show{
+  transform: matrix(1,0,0,1,0,0);
+}
