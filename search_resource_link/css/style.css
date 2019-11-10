@@ -1,0 +1,24 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+}
+.title {
+  margin: 0;
+}
+.bg-is-black .title {
+  color: #fff;
+}
+.section{
+  height: 400px;
+  text-align: center;
+}
+.section--white{
+  background-color: white;
+}
+.section--black{
+  background-color: black;
+  color: white;
+}
