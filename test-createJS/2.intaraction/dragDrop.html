@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script>
+    window.addEventListener("load", init);
+
+    function init() {
+      var dragPointX;
+      var dragPointY;
+
+      // Stageオブジェクトを作成します
+      var stage = new createjs.Stage("myCanvas");
+
+      // 円を作成します
+      var ball = new createjs.Shape();
+      ball.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+      ball.graphics.drawCircle(0, 0, 100); //半径 100px の円を描画
+      ball.x = 200; // X 座標 200px の位置に配置
+      ball.y = 200; // Y 座標 200px の位置に配置
+      stage.addChild(ball); // 表示リストに追加
+      // Stageの描画を更新します
+      stage.update();
+      // ball.addEventListener("mousedown", handleDown);
+      ball.addEventListener("pressmove", handleMove);
+      // ball.addEventListener("pressup", handleUp);
+
+      function handleMove(event) {
+        // 表示オブジェクトはマウス座標に追随する
+        ball.x = stage.mouseX;
+        ball.y = stage.mouseY;
+      }
+      createjs.Ticker.addEventListener("tick", handleTick);
+
+      function handleTick() {
+        stage.update(); // 画面更新
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="640" height="320"></canvas>
+</body>
+
+</html>
