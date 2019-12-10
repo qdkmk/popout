@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script>
+    window.addEventListener("load", init);
+
+    function init() {
+
+      var stage = new createjs.Stage("myCanvas");
+
+      var polyList = []
+      for (var i = 0; i < 20; i++) {
+        var poly = new createjs.Shape();
+        stage.addChild(poly); // 表示リストに追加
+        poly.x = 400 * Math.random()
+        poly.y = 200 * Math.random()
+        polyList[i] = poly
+      }
+      // 星を作成します
+      poly.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+      poly.graphics.drawPolyStar(0, 0, 75, 5, 0.6, -90); //75pxの星を記述
+
+
+      // 点を作成します
+      var miniStar = new createjs.Shape();
+      miniStar.graphics.beginFill("blue").drawPolyStar(0, 0, 10, 5, 0.6, -90);
+      miniStar.y = 100;
+      stage.addChild(miniStar); // 表示リストに追加
+      // 小さな星の移動速度です
+      var vx = +10;
+
+      createjs.Ticker.addEventListener("tick", handleTick);
+
+      function handleTick() {
+        // 小さな星のモーションを指定
+        miniStar.x += vx;
+        if (miniStar.x > 400) {
+          vx = -10;
+          miniStar.x = 400;
+        } else if (miniStar.x < 0) {
+          vx = +10;
+          miniStar.x = 0;
+        }
+
+        // 複数の星とのアタリ判定をfor文でチェックする
+        for (var i = 0; i < polyList.length; i++) {
+          // 配列の要素を参照する (i番目の星)
+          var poly = polyList[i]; // i 番目の poly を取得
+          // 小さな星とi番目の星の相対座標を求める
+          var point = miniStar.localToLocal(0, 0, poly);
+          // i番目の星と小さな星があたっているかを調べる
+          var isHit = poly.hitTest(point.x, point.y);
+          // あたっていれば
+          if (isHit == true) {
+            // i番目の星を赤色で塗る
+            poly.graphics.clear()
+              .beginFill("DarkRed")
+              .drawPolyStar(0, 0, 30, 10, 0.6, -90);
+          } else {
+            // i番目の星を緑色で塗る
+            poly.graphics.clear()
+              .beginFill("green")
+              .drawPolyStar(0, 0, 30, 10, 0.6, -90);
+          }
+
+          stage.update(); // 画面更新
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="640" height="320"></canvas>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script>
+    window.addEventListener("load", init);
+
+    function init() {
+
+      var stage = new createjs.Stage("myCanvas");
+
+      // 星を作成します
+      var poly = new createjs.Shape();
+      poly.graphics.beginFill("DarkRed"); // 赤色で描画するように設定
+      poly.graphics.drawPolyStar(0, 0, 75, 5, 0.6, -90); //75pxの星を記述
+      stage.addChild(poly); // 表示リストに追加
+      poly.x = 200;
+      poly.y = 100;
+
+      // 点を作成します
+      var dot = new createjs.Shape();
+      dot.graphics.beginFill("blue").drawCircle(0, 0, 5);
+      stage.addChild(dot); // 表示リストに追加
+
+      createjs.Ticker.addEventListener("tick", handleTick);
+
+      function handleTick() {
+        // ドットのモーションを指定
+        dot.x = stage.mouseX;
+        dot.y = stage.mouseY;
+
+        var point = poly.globalToLocal(stage.mouseX, stage.mouseY)
+        var isHit = poly.hitTest(point.x, point.y)
+
+
+        if (isHit == true) {
+          poly.graphics.clear()
+            .beginFill("DarkRed")
+            .drawPolyStar(0, 0, 75, 5, 0.6, -90)
+        } else {
+          poly.graphics.clear()
+            .beginFill("green")
+            .drawPolyStar(0, 0, 75, 5, 0.6, -90)
+        }
+
+        stage.update(); // 画面更新
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="640" height="320"></canvas>
+</body>
+
+</html>
